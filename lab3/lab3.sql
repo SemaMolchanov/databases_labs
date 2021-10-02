@@ -306,13 +306,51 @@ where prereq_id = 'CS-101');
 
 2 task
 
+a)
+select dept_name, round(avg(salary)) as avg_salary
+from instructor
+group by dept_name
+order by avg_salary;
+
+b)
+select building
+from section
+group by building
+order by count(*) desc
+limit 1;
+
+c)
+with temp as
+(select dept_name, count(*) as num_of_courses
+from course
+group by dept_name)
+select *
+from temp
+where num_of_courses = (select min(num_of_courses) from temp);
+
+d)
+with temp as
+(select id, count(*) as num
+from takes
+where course_id like 'CS%'
+group by id)
+select name, id
+from student
+where id in
+(select id
+from temp
+where num > 3);
+
 e)
+select ID, name
+from instructor
+where ID in (
 select ID
 from teaches
 where year = 2018 except
 select ID
 from teaches
-where year = 2017;
+where year = 2017);
 
 f)
 select *
@@ -320,6 +358,37 @@ from instructor
 where dept_name = 'Biology'
 or dept_name = 'Philosophy'
 or dept_name = 'Music';
+
+3 task
+
+a)
+select id, name
+from student
+where id in
+(select id
+from takes
+where course_id like 'CS%' and grade like 'A%')
+order by name;
+
+b)
+select id, name
+from instructor
+where id in
+(select i_ID
+from advisor
+where s_ID in
+(select id
+from takes
+where grade not in ('A', 'A-', 'B+', 'B')));
+
+с)
+
+d)
+
+e)
+
+
+
 
 
 
