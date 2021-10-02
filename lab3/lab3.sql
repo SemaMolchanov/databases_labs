@@ -266,15 +266,28 @@ insert into prereq values ('CS-319', 'CS-101');
 insert into prereq values ('CS-347', 'CS-101');
 insert into prereq values ('EE-181', 'PHY-101');
 
-
+1 task
+a)
 select * from course where credits > 3;
 
+b)
 select * from classroom where building = 'Packard' or building ='Watson';
 
+c)
 select * from course where dept_name = 'Comp. Sci.';
 
+d)
+select course_id, title
+from course
+where course_id in
+(select course_id
+from section
+where semester = 'Fall');
+
+e)
 select * from student where tot_cred between 45 and 90;
 
+f)
 select *
 from student
 where name like '%a'
@@ -284,10 +297,16 @@ or name like '%e'
 or name like '%u'
 or name like '%y';
 
-select *
+g)
+select course_id, title
+from course
+where (course_id) in (select prereq.course_id
 from prereq
-where prereq_id = 'CS-101';
+where prereq_id = 'CS-101');
 
+2 task
+
+e)
 select ID
 from teaches
 where year = 2018 except
@@ -295,10 +314,13 @@ select ID
 from teaches
 where year = 2017;
 
+f)
 select *
 from instructor
 where dept_name = 'Biology'
 or dept_name = 'Philosophy'
 or dept_name = 'Music';
+
+
 
 
