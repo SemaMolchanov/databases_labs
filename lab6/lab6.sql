@@ -122,11 +122,26 @@ select d.name, number_of_sells,
 total_purchases_amount, average_purchases_amount
 from dealer as d inner join task_c as c on d.id = c.dealer_id;
 
-
-
 -- d)
+create view task_d as
+select d.location, (sum(s.amount*d.charge)) as earned
+from dealer as d inner join sell as s on d.id = s.dealer_id
+group by location;
+
+select * from task_d;
+
 -- e)
+create view task_e as
+select location, count(s.id) as number_of_sells,
+       sum(amount) as total_purchases_amount,
+       avg(amount) as average_purchases_amount
+from sell as s inner join dealer as d on d.id = s.dealer_id
+group by location;
+
+select * from task_e;
+
 -- f)
+
 -- g)
 
 
