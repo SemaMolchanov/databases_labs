@@ -86,3 +86,14 @@ create unique index acc_cus_curr on accounts (account_id, customer_id, currency)
 
 -- 6) simulate transaction
 
+insert into transactions values(4, '2021-11-05 19:12:34.000000', 'NK90123', 'AB10203', 100, 'init');
+
+begin transaction isolation level repeatable read;
+update accounts set balance = balance - 100
+where account_id = 'NK90123';
+update accounts set balance = balance + 100
+where account_id = 'AB10203';
+commit;
+
+update transactions set status = 'commited'
+where id = 4;
