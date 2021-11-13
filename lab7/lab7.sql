@@ -81,3 +81,8 @@ alter column status set not null;
 
 -- 5) create indeces
 
+create unique index acc_cus_curr on accounts (account_id, customer_id, currency);
+
+
+-- 6) simulate transaction
+
