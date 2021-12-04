@@ -541,5 +541,4 @@ alter table orders add primary key(ID, store_ID, customer_ID, product_ID);
 
 
 
-
 select * from product_available;
